@@ -3,6 +3,7 @@
   public function home() {
     $countries = Country::all();
     $states = State::all();
+	$statuses = Status::all();
     $req = "";
     $customer = new Customer();
     require_once('views/newcustomer/home.php');
@@ -21,10 +22,13 @@
       $Customer-> countryID = $_POST["country"];
       $Customer-> postalCode = $_POST["PostalCode"];
       $Customer-> email = $_POST["Email"];
+      $Customer-> statusID = $_POST["StatusID"];
+      $Customer-> IsActive = $_POST["active"];
       $Customer-> createdBy = $_POST["CreatedBy"];
       Customer::insert($Customer);
       $countries = Country::all();
       $states = State::all();
+	  $statuses = Status::all();
       require_once('views/newcustomer/home.php');
       }
        else if(isset($_POST['delete'])){
@@ -35,6 +39,7 @@
        else if(isset($_POST['edit'])){
         $countries = Country::all();
         $states = State::all();
+		$statuses = Status::all();
         $customer = Customer::getById($_POST['CustomerID']);
         require_once('views/newcustomer/customerEditForm.php');
        
@@ -59,11 +64,14 @@
       $Customer-> countryID = $_POST["country"];
       $Customer-> postalCode = $_POST["PostalCode"];
       $Customer-> email = $_POST["Email"];
-      $Customer-> modifiedBy = $_POST["ModifiedBy"];
+      $Customer-> statusID = $_POST["StatusID"];
+	  $Customer-> modifiedBy = $_POST["ModifiedBy"];
+
       
 
         $countries = Country::all();
         $states = State::all();
+		$statuses = Status::all();
         $customer = Customer::update($Customer);
         $customers = Customer::all();
         require_once('views/newcustomer/customerList.php');

@@ -11,7 +11,8 @@
       case 'newCustomer':
         require_once('models/countries.php');
         require_once('models/states.php');
-        require_once('models/Customer.php');
+        require_once('models/customer.php');
+		require_once('models/statuses.php');
         $controller = new NewCustomerController();
         break;
     }

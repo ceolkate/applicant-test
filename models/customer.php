@@ -14,8 +14,9 @@ class Customer{
     public $modifiedDate;
     public $createdBy;
     public $createdDate;
+    public $statusID;
 
-    public function __construct($id= '', $name= '' ,$title= '',$address= '', $city= '',$stateID= '',$countryID= '',$postalCode= '',$email= '',$isActive= '',  $modifyID= '',$modifiedDate= '',$createdBy= '', $createdDate= '') {
+    public function __construct($id= '', $name= '' ,$title= '',$address= '', $city= '',$stateID= '',$countryID= '',$postalCode= '',$email= '',$isActive= '',  $modifyID= '',$modifiedDate= '',$createdBy= '', $createdDate= '', $statusID= '') {
       $this->id = $id;
       $this->name  = $name;
       $this->title  = $title;
@@ -30,6 +31,7 @@ class Customer{
       $this->modifiedDate  = $modifiedDate;
       $this->createdBy  = $createdBy;
       $this->createdDate  = $createdDate;
+      $this->statusID = $statusID;
     }
 
     public static function all() {
@@ -50,7 +52,8 @@ class Customer{
         	$post['ModifyBy'],
         	$post['ModifyDate'],
         	$post['CreateBy'],
-        	$post['CreateDate']
+        	$post['CreateDate'],
+		$post['StatusID']
         	);
       }
       return $list;
@@ -75,7 +78,8 @@ class Customer{
           $post['ModifyBy'],
           $post['ModifyDate'],
           $post['CreateBy'],
-          $post['CreateDate']
+          $post['CreateDate'],
+	  $post['StatusID']
           );
       }
       return $list;
@@ -85,7 +89,7 @@ class Customer{
     public static function insert($Customer)
     {
     	$db = Db::getInstance();
-    	$req = $db->exec("INSERT INTO customer ( CustomerName,CustomerTitle,Address1,City,StateID,CountryID,PostalCode, Email,CreateBy,ModifyBy, IsActive) VALUES ('" . $Customer-> name . "','"  . $Customer-> title . "','" . $Customer-> address . "','" . $Customer-> city . "'," . $Customer-> stateID . ", " . $Customer-> countryID . ", " . $Customer-> postalCode . ", '" . $Customer-> email . "', '" . $Customer-> createdBy . "','". $Customer-> createdBy ."',1)");
+    	$req = $db->exec("INSERT INTO customer ( CustomerName,CustomerTitle,Address1,City,StateID,CountryID,PostalCode, Email,CreateBy,ModifyBy, IsActive,StatusID) VALUES ('" . $Customer-> name . "','"  . $Customer-> title . "','" . $Customer-> address . "','" . $Customer-> city . "'," . $Customer-> stateID . ", " . $Customer-> countryID . ", " . $Customer-> postalCode . ", '" . $Customer-> email . "', '" . $Customer-> createdBy . "','". $Customer-> createdBy ."',1,". $Customer-> statusID . " )");
       
     }
 
@@ -98,7 +102,7 @@ class Customer{
     public static function update($Customer)
     {
       $db = Db::getInstance();
-      $req = $db->exec("UPDATE customer SET CustomerName='" . $Customer-> name . "',CustomerTitle= '"  . $Customer-> title . "',Address1 = '" . $Customer-> address . "',City='" . $Customer-> city . "',StateID=" . $Customer-> stateID . ", CountryID=" . $Customer-> countryID . ",PostalCode=" . $Customer-> postalCode . ",Email= '" . $Customer-> email . "',ModifyBy= '" . $Customer-> modifiedBy . "'  WHERE CustomerID = '$Customer->id'");
+      $req = $db->exec("UPDATE customer SET CustomerName='" . $Customer-> name . "',CustomerTitle= '"  . $Customer-> title . "',Address1 = '" . $Customer-> address . "',City='" . $Customer-> city . "',StateID=" . $Customer-> stateID . ", CountryID=" . $Customer-> countryID . ",PostalCode=" . $Customer-> postalCode . ",Email= '" . $Customer-> email . "',ModifyBy= '" . $Customer-> modifiedBy . "', StatusID = ". $Customer-> statusID ."  WHERE CustomerID = $Customer->id");
     }
 }
 ?>
